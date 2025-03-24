@@ -160,7 +160,7 @@ func (a *ArgoResource) RedirectGenerators(repo, branch string, redirectRevisions
 
 		// Check repoURL
 		repoURL := yamlutil.GetYamlValue(gitGen, []string{"repoURL"})
-		if repoURL == nil || !containsIgnoreCase(repoURL.Value, repo) {
+		if repoURL == nil || repoURL.Value != repo {
 			log.Debug().Str("patchType", "redirectGenerators").Str("file", a.FileName).Str("branch", branch).Msgf("no 'spec.generators[%d].git.repoURL' key found in ApplicationSet: %s", index, a.Name)
 			continue
 		}
